@@ -1,20 +1,26 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import com.revrobotics.CANSparkMax;
+import com.kauailabs.navx.frc.AHRS;
 
 public class Drivetrain implements Subsystem {
-    MotorController l1, l2, r1, r2;
+    CANSparkMax l1, l2, r1, r2;
+    AHRS gyro;
 
     public Drivetrain(
-        MotorController l1,
-        MotorController l2,
-        MotorController r1,
-        MotorController r2
+        CANSparkMax l1,
+        CANSparkMax l2,
+        CANSparkMax r1,
+        CANSparkMax r2,
+        AHRS gyro
     ) {
         this.l1 = l1;
         this.l2 = l2;
         this.r1 = r1;
         this.r2 = r2;
+        this.gyro = gyro;
     }
 }
