@@ -22,5 +22,13 @@ public class Drivetrain implements Subsystem {
         this.r1 = r1;
         this.r2 = r2;
         this.gyro = gyro;
+
+        l2.follow(l1);
+        r2.follow(r1);
+    }
+
+    public void arcadeDrive(double throttle, double wheel) {
+        l1.set(throttle + wheel);
+        r1.set(throttle - wheel);
     }
 }
