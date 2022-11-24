@@ -31,6 +31,14 @@ public class Drivetrain implements Subsystem {
         r2.follow(r1);
     }
 
+    public static void main(String... args) {
+
+    }
+
+    public void method() {
+        System.out.println("blah");
+    }
+
     public void arcadeDrive(double throttle, double wheel) {
         l1.set(throttle + wheel);
         r1.set(throttle - wheel);

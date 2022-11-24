@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Drivetrain;
@@ -38,6 +39,8 @@ public class RobotContainer {
   AHRS gyro = new AHRS();
   //subsystems
   Drivetrain drive = new Drivetrain(l1, l2, r1, r2, gyro);
+
+  PS4Controller controller = new PS4Controller(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
