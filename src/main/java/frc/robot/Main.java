@@ -14,6 +14,10 @@ import edu.wpi.first.wpilibj.RobotBase;
 public final class Main {
   private Main() {}
 
+  public static int print(int x) {
+    return x+5;
+  }
+
   /**
    * Main initialization function. Do not perform any initialization here.
    *

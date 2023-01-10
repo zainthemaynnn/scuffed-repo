@@ -6,6 +6,10 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj2.command.Subsystem;
+import com.revrobotics.CANSparkMax;
+import com.kauailabs.navx.frc.AHRS;
 public class Drivetrain implements Subsystem {
     VictorSPX l1, l2;
     TalonSRX r1, r2;
@@ -28,6 +32,14 @@ public class Drivetrain implements Subsystem {
         r2.setInverted(true);
         l2.follow(l1);
         r2.follow(r1);
+    }
+
+    public static void main(String... args) {
+
+    }
+
+    public void method() {
+        System.out.println("blah");
     }
 
     public void arcadeDrive(double throttle, double wheel) {
