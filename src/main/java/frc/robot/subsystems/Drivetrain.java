@@ -1,20 +1,21 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import com.revrobotics.CANSparkMax;
 import com.kauailabs.navx.frc.AHRS;
 
 public class Drivetrain implements Subsystem {
-    CANSparkMax l1, l2, r1, r2;
+    VictorSPX l1, l2;
+    TalonSRX r1, r2;
     AHRS gyro;
 
     public Drivetrain(
-        CANSparkMax l1,
-        CANSparkMax l2,
-        CANSparkMax r1,
-        CANSparkMax r2,
+        VictorSPX l1,
+        VictorSPX l2,
+        TalonSRX r1,
+        TalonSRX r2,
         AHRS gyro
     ) {
         this.l1 = l1;
@@ -23,12 +24,14 @@ public class Drivetrain implements Subsystem {
         this.r2 = r2;
         this.gyro = gyro;
 
+        r1.setInverted(true);
+        r2.setInverted(true);
         l2.follow(l1);
         r2.follow(r1);
     }
 
     public void arcadeDrive(double throttle, double wheel) {
-        l1.set(throttle + wheel);
-        r1.set(throttle - wheel);
+        l1.set(ControlMode.PercentOutput, throttle + wheel);
+        r1.set(ControlMode.PercentOutput, throttle - wheel);
     }
 }

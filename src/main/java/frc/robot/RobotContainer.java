@@ -4,15 +4,18 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -26,17 +29,24 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   //hardware
-  CANSparkMax 
-    l1 = new CANSparkMax(RobotMap.BACK_MOTOR_LEFT, MotorType.kBrushless),
-    l2 = new CANSparkMax(RobotMap.FRONT_MOTOR_LEFT, MotorType.kBrushless),
-    r1 = new CANSparkMax(RobotMap.BACK_MOTOR_RIGHT, MotorType.kBrushless),
-    r2 = new CANSparkMax(RobotMap.FRONT_MOTOR_RIGHT, MotorType.kBrushless);
+  VictorSPX
+    l1 = new VictorSPX(RobotMap.BACK_MOTOR_LEFT),
+    l2 = new VictorSPX(RobotMap.FRONT_MOTOR_LEFT);
+  TalonSRX
+    r1 = new TalonSRX(RobotMap.BACK_MOTOR_RIGHT),
+    r2 = new TalonSRX(RobotMap.FRONT_MOTOR_RIGHT);
   AHRS gyro = new AHRS();
   //subsystems
   Drivetrain drive = new Drivetrain(l1, l2, r1, r2, gyro);
+  PS4Controller PScon;
+
+  // command
+  ArcadeDrive arcadeDrive = new ArcadeDrive(drive, PScon::getLeftY, PScon::getRightX);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    // Set as default command
+    drive.setDefaultCommand(arcadeDrive);
     // Configure the button bindings
     configureButtonBindings();
   }
