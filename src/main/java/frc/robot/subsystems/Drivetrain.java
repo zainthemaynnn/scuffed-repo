@@ -11,15 +11,19 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 import com.revrobotics.CANSparkMax;
 import com.kauailabs.navx.frc.AHRS;
 public class Drivetrain implements Subsystem {
-    VictorSPX l1, l2;
-    TalonSRX r1, r2;
+    CANSparkMax l1, l2;
+    CANSparkMax r1, r2;
     AHRS gyro;
+    l1 = new CANSparkMax(0);
+    l2 = new CANSparkMax(1);
+    r1 = new CANSparkMax(2);
+    r2 = new CANSparkMax(3);
 
     public Drivetrain(
-        VictorSPX l1,
-        VictorSPX l2,
-        TalonSRX r1,
-        TalonSRX r2,
+        CANSparkMax l1,
+        CANSparkMax l2,
+        CANSparkMax r1,
+        CANSparkMax r2,
         AHRS gyro
     ) {
         this.l1 = l1;
@@ -45,5 +49,12 @@ public class Drivetrain implements Subsystem {
     public void arcadeDrive(double throttle, double wheel) {
         l1.set(ControlMode.PercentOutput, throttle + wheel);
         r1.set(ControlMode.PercentOutput, throttle - wheel);
+    }
+    @Override
+    public void close() {
+        l1.close();
+        l2.close();
+        r1.close();
+        r2.close();
     }
 }

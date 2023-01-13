@@ -9,18 +9,9 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-<<<<<<< HEAD
 public class ArcadeDrive extends CommandBase {
   Drivetrain drive;
   DoubleSupplier throttle, wheel;
-=======
-public class ArcadeDrive implements Command {
-    Drivetrain drive;
-
-    public ArcadeDrive(Drivetrain drive) {
-        this.drive = drive;
-    }
->>>>>>> 44511e90b1d4d9f0fe72c65bf52269078de99619
 
   /** Creates a new ArcadeDrive. */
   public ArcadeDrive(Drivetrain drive, DoubleSupplier throttle, DoubleSupplier wheel) {
